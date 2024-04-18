@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:login_page/commonWidgets/custom_text_form_field.dart';
+import 'package:login_page/commonWidgets/utils.dart';
 import 'package:login_page/create_an_account.dart';
 
 class LoginPage extends StatelessWidget {
@@ -34,19 +36,17 @@ class LoginPage extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 20),
-                    TextFormField(
+                    CustomTextFormField(
+                        labelText: 'Email',
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'Please enter email';
                         }
                         return null;
                       },
-                      decoration: const InputDecoration(
-                        labelText: 'Email',
-                      ),
                     ),
-                    const SizedBox(height: 20),
-                    TextFormField(
+                    vGap(),
+                    CustomTextFormField(
                       obscureText: true,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
@@ -54,11 +54,9 @@ class LoginPage extends StatelessWidget {
                         }
                         return null;
                       },
-                      decoration: const InputDecoration(
-                        labelText: 'Password',
-                      ),
+                      labelText: 'Password',
                     ),
-                    const SizedBox(height: 20),
+                    vGap(),
                     ElevatedButton(
                       onPressed: () {
                         if (formKey.currentState!.validate()) {
@@ -69,10 +67,10 @@ class LoginPage extends StatelessWidget {
                       },
                       child: const Text('Login'),
                     ),
-                    const SizedBox(height: 10),
+                    vGap(),
                     TextButton(
                       onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => const CreateAccountPage()));
+                        Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => CreateAccountPage()));
                       },
                       child: const Text('Create an account'),
                     ),

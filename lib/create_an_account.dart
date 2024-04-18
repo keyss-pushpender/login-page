@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:login_page/commonWidgets/custom_text_form_field.dart';
+import 'package:login_page/commonWidgets/utils.dart';
 
 class CreateAccountPage extends StatelessWidget {
-  const CreateAccountPage({super.key});
+  CreateAccountPage({super.key});
+
+  final passwordController = TextEditingController();
+  final confirmPasswordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -31,44 +36,51 @@ class CreateAccountPage extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    TextFormField(
+                    vGap(),
+                    CustomTextFormField(
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'Please enter full name';
                         }
                         return null;
                       },
-                      decoration: const InputDecoration(
-                        labelText: 'Full Name',
-                      ),
+                      labelText: 'Full name',
                     ),
-                    const SizedBox(height: 20),
-                    TextFormField(
+                    vGap(),
+                    CustomTextFormField(
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'Please enter email';
                         }
                         return null;
                       },
-                      decoration: const InputDecoration(
-                        labelText: 'Email',
-                      ),
+                      labelText: 'Email',
                     ),
-                    const SizedBox(height: 20),
-                    TextFormField(
+                    vGap(),
+                    CustomTextFormField(
+                      controller: passwordController,
                       obscureText: true,
-                      decoration: const InputDecoration(
-                        labelText: 'Password',
-                      ),
+                      validator: (value) {
+                        if(value == null || value.isEmpty) {
+                          return 'Please enter Password';
+                        }
+                        return null;
+                      },
+                      labelText: 'Password',
                     ),
-                    const SizedBox(height: 20),
-                    TextFormField(
+                    vGap(),
+                    CustomTextFormField(
+                      controller: confirmPasswordController,
                       obscureText: true,
-                      decoration: const InputDecoration(
-                        labelText: 'Confirm Password',
-                      ),
+                      validator: (value) {
+                        if(value != null && value.isNotEmpty && value != passwordController.text) {
+                          return "Password and confirm Password should be same";
+                        }
+                        return null;
+                      },
+                      labelText: 'Confirm Password',
                     ),
-                    const SizedBox(height: 20),
+                    vGap(),
                     ElevatedButton(
                       onPressed: () {
                         if (formKey.currentState!.validate()) {
