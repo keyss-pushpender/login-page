@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class CustomTextFormField extends StatelessWidget {
+class CustomTextFormField extends StatefulWidget {
   final String? labelText;
   final bool obscureText;
   final String? Function(String?)? validator;
@@ -15,13 +15,24 @@ class CustomTextFormField extends StatelessWidget {
   });
 
   @override
+  State<CustomTextFormField> createState() => _CustomTextFormFieldState();
+}
+
+class _CustomTextFormFieldState extends State<CustomTextFormField> {
+  final key = GlobalKey<FormFieldState>();
+
+  @override
   Widget build(BuildContext context) {
     return TextFormField(
-      controller: controller,
-      validator: validator,
-      obscureText: obscureText,
+      key: key,
+      controller: widget.controller,
+      onChanged: (e) {
+        key.currentState!.validate();
+      },
+      validator: widget.validator,
+      obscureText: widget.obscureText,
       decoration: InputDecoration(
-        labelText: labelText,
+        labelText: widget.labelText,
         border: const OutlineInputBorder()
       ),
     );

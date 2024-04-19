@@ -21,77 +21,81 @@ class CreateAccountPage extends StatelessWidget {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(15.0),
             ),
-            child: Container(
-              padding: const EdgeInsets.all(30.0),
-              constraints: const BoxConstraints(maxWidth: 400.0),
-              child: Form(
-                key: formKey,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    const Text(
-                      'Create an Account',
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
+            child: SingleChildScrollView(
+              child: Container(
+                padding: const EdgeInsets.all(30.0),
+                constraints: const BoxConstraints(maxWidth: 400.0),
+                child: Form(
+                  key: formKey,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      const Text(
+                        'Create an Account',
+                        style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                    ),
-                    vGap(),
-                    CustomTextFormField(
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter full name';
-                        }
-                        return null;
-                      },
-                      labelText: 'Full name',
-                    ),
-                    vGap(),
-                    CustomTextFormField(
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter email';
-                        }
-                        return null;
-                      },
-                      labelText: 'Email',
-                    ),
-                    vGap(),
-                    CustomTextFormField(
-                      controller: passwordController,
-                      obscureText: true,
-                      validator: (value) {
-                        if(value == null || value.isEmpty) {
-                          return 'Please enter Password';
-                        }
-                        return null;
-                      },
-                      labelText: 'Password',
-                    ),
-                    vGap(),
-                    CustomTextFormField(
-                      controller: confirmPasswordController,
-                      obscureText: true,
-                      validator: (value) {
-                        if(value != null && value.isNotEmpty && value != passwordController.text) {
-                          return "Password and confirm Password should be same";
-                        }
-                        return null;
-                      },
-                      labelText: 'Confirm Password',
-                    ),
-                    vGap(),
-                    ElevatedButton(
-                      onPressed: () {
-                        if (formKey.currentState!.validate()) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text('Processing Data')),
-                          );
-                        }
-                      },
-                      child: const Text('Create Account'),
-                    ),
-                  ],
+                      vGap(),
+                      CustomTextFormField(
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter full name';
+                          }
+                          return null;
+                        },
+                        labelText: 'Full name',
+                      ),
+                      vGap(),
+                      CustomTextFormField(
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter email';
+                          }
+                          return null;
+                        },
+                        labelText: 'Email',
+                      ),
+                      vGap(),
+                      CustomTextFormField(
+                        controller: passwordController,
+                        obscureText: true,
+                        validator: (value) {
+                          if(value == null || value.isEmpty) {
+                            return 'Please enter Password';
+                          }
+                          return null;
+                        },
+                        labelText: 'Password',
+                      ),
+                      vGap(),
+                      CustomTextFormField(
+                        controller: confirmPasswordController,
+                        obscureText: true,
+                        validator: (value) {
+                          if(value == null || value.isEmpty) {
+                            return 'Please enter Confirm Password';
+                          } else if(value != passwordController.text) {
+                            return "Password and confirm Password should be same";
+                          }
+                          return null;
+                        },
+                        labelText: 'Confirm Password',
+                      ),
+                      vGap(),
+                      ElevatedButton(
+                        onPressed: () {
+                          if (formKey.currentState!.validate()) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text('Processing Data')),
+                            );
+                          }
+                        },
+                        child: const Text('Create Account'),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
