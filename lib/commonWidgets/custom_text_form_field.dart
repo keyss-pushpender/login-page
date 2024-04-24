@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:login_page/commonWidgets/utils.dart';
 
 class CustomTextFormField extends StatefulWidget {
   final String? labelText;
@@ -33,7 +34,9 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       obscureText: widget.obscureText,
       decoration: InputDecoration(
         labelText: widget.labelText,
-        border: const OutlineInputBorder()
+        border: textFieldBorder(),
+        focusedBorder: focusedTextFieldBorder(),
+        floatingLabelStyle: const TextStyle(color: Colors.purple)
       ),
     );
   }
